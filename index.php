@@ -48,6 +48,7 @@ function getTwitter($docroot) {
   $consumer_secret = "your consumer secret";
   $access_key = "your access key";
   $access_secret = "your access secret";
+  $twitteruser = "nodomain";
   require_once($docroot."lib/twitteroauth.php");
   $id_saved = file_get_contents($docroot."data/twitter.txt");
   $twitter = new TwitterOAuth ($consumer_key, $consumer_secret, $access_key, $access_secret);
@@ -72,7 +73,7 @@ function getTwitter($docroot) {
         $body = "<a href=\"http://maps.google.com/maps?q=".$results[0]->geo->coordinates[0].",".$results[0]->geo->coordinates[1]."\" target=\"_blank\">Location</a><br />";
       }
       
-      $body .= "Autoposted from <a href=\"http://twitter.com/nodomain/status/".$id."\">Twitter</a>";
+      $body .= "Autoposted from <a href=\"http://twitter.com/".$twitteruser."/status/".$id."\">Twitter</a>";
 
       file_put_contents($filename, file_get_contents($imageurl.":large"));
       sendMail($filename, $filenameshort, $imagetext, "twitter", $body);
